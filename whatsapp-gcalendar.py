@@ -1,8 +1,6 @@
 import datetime
 import os.path
-import pywhatkit
-
-from bidi.algorithm import get_display
+from pywhatkit import whats
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -14,13 +12,8 @@ SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 # , 'https://www.googleapis.com/auth/calendar',
 # 'https://www.googleapis.com/auth/calendar.events.readonly', 'https://www.googleapis.com/auth/calendar.events']
 
-USER_DICT = {
-  "יעקב": "Jacob Solomon",
-  "רועי": "Roei Goldwasser",
-  "שני": "Shany Avitbol",
-  "עידן": "Edan Gurin",
-  "אופיר": "Ofir Itzhakov"
-}
+GROUP_ID = "LhccGDPEPKy3FCfLcdH739"
+USER_ID = "+972525420276"
 
 def main():
     """Shows basic usage of the Google Calendar API.
@@ -60,20 +53,17 @@ def main():
             return
 
         now = datetime.datetime.now()
-        pywhatkit.sendwhatmsg_to_group("LhccGDPEPKy3FCfLcdH739", "AUTOMATED MESSAGE : SHIFTS NEXT WEEK", now.hour, now.minute + 1, 15, True)
-        
+        whats.sendwhatmsg_to_group(USER_ID, "המשמרות בשבוע הבא :", now.hour, now.minute + 1, 15, True)
         # Prints the start and name of the next 10 events
         for event in events:
             if ('לילה' in event['summary']):
                 start = event['start'].get('dateTime', event['start'].get('date'))
-                # msg = get_display('בתאריך :' + start + ' ' + event['summary'])
-                uname = event['summary'].split("-",1)[1].strip()
-                event['summary'] = event['summary'].replace(uname, USER_DICT[uname])
-                event['summary'] = event['summary'].replace("לילה", "shift")
-                msg = 'Date: ' + start + ' ' + event['summary']
+                dt = datetime.datetime.strptime(start, '%Y-%m-%d')
+                dt = '{0}/{1}/{2}'.format(dt.day, dt.month, dt.year)
+                msg = 'בתאריך :' + dt + ' ' + event['summary']
                 print(msg)
                 now = datetime.datetime.now()
-                pywhatkit.sendwhatmsg_to_group("LhccGDPEPKy3FCfLcdH739", msg , now.hour, now.minute + 1, 15, True)
+                whats.sendwhatmsg_to_group(USER_ID, msg , now.hour, now.minute + 1, 15, True)
 
 
     except HttpError as error:
