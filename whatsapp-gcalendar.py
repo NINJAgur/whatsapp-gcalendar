@@ -12,8 +12,9 @@ SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 # , 'https://www.googleapis.com/auth/calendar',
 # 'https://www.googleapis.com/auth/calendar.events.readonly', 'https://www.googleapis.com/auth/calendar.events']
 
-GROUP_ID = "LhccGDPEPKy3FCfLcdH739"
-USER_ID = "+972525420276"
+GROUP_ID = "KRVu9MZAIjkIcHep58dMS7"
+GROUP_TEST = "LhccGDPEPKy3FCfLcdH739"
+USER_TEST = "+972525420276"
 
 def main():
     """Shows basic usage of the Google Calendar API.
@@ -53,7 +54,7 @@ def main():
             return
 
         now = datetime.datetime.now()
-        whats.sendwhatmsg_to_group(USER_ID, "המשמרות בשבוע הבא :", now.hour, now.minute + 1, 15, True)
+        whats.sendwhatmsg_to_group(GROUP_ID, "המשמרות בשבוע הבא :", now.hour, now.minute + 1, 15, True)
         # Prints the start and name of the next 10 events
         for event in events:
             if ('לילה' in event['summary']):
@@ -63,7 +64,7 @@ def main():
                 msg = 'בתאריך :' + dt + ' ' + event['summary']
                 print(msg)
                 now = datetime.datetime.now()
-                whats.sendwhatmsg_to_group(USER_ID, msg , now.hour, now.minute + 1, 15, True)
+                whats.sendwhatmsg_to_group(GROUP_ID, msg , now.hour, now.minute + 1, 15, True)
 
 
     except HttpError as error:
