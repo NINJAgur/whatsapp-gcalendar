@@ -54,18 +54,20 @@ def main():
             return
 
         now = datetime.datetime.now()
-        whats.sendwhatmsg_to_group(GROUP_ID, "המשמרות בשבוע הבא :", now.hour, now.minute + 1, 15, True)
-        # Prints the start and name of the next 10 events
+        message = "המשמרות בשבוע הבא : \n"
+
         for event in events:
             if ('לילה' in event['summary']):
                 start = event['start'].get('dateTime', event['start'].get('date'))
                 dt = datetime.datetime.strptime(start, '%Y-%m-%d')
                 dt = '{0}/{1}/{2}'.format(dt.day, dt.month, dt.year)
                 msg = 'בתאריך :' + dt + ' ' + event['summary']
-                print(msg)
-                now = datetime.datetime.now()
-                whats.sendwhatmsg_to_group(GROUP_ID, msg , now.hour, now.minute + 1, 15, True)
-
+                message += msg + "\n"
+        
+        
+        print(message)
+        
+        whats.sendwhatmsg_to_group(GROUP_TEST, message, now.hour, now.minute + 1, 15, True)
 
     except HttpError as error:
         print('An error occurred: %s' % error)
