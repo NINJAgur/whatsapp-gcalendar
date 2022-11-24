@@ -67,7 +67,7 @@ def main():
         
         print(message)
         
-        whats.sendwhatmsg_to_group(GROUP_TEST, message, now.hour, now.minute + 1, 15, True)
+        whats.sendwhatmsg_to_group(GROUP_ID, message, now.hour, now.minute + 1, 15)
 
     except HttpError as error:
         print('An error occurred: %s' % error)
