@@ -65,7 +65,11 @@ def send_message(message: str, receiver: str, wait_time: int) -> None:
     click(WIDTH / 2, HEIGHT / 2)
     time.sleep(wait_time - 7)
     if not check_number(number=receiver):
-        Controller().type(message)
+        for char in message:
+            if char == "\n":
+                hotkey("shift", "enter")
+            else:
+                Controller().type(char)
 
     press("enter")
 

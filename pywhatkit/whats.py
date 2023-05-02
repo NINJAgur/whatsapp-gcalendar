@@ -90,8 +90,8 @@ def sendwhatmsg(
 ) -> None:
     """Send a WhatsApp Message at a Certain Time"""
 
-    if not core.check_number(number=phone_no):
-        raise exceptions.CountryCodeException("Country Code Missing in Phone Number!")
+    #if not core.check_number(number=phone_no):
+    #    raise exceptions.CountryCodeException("Country Code Missing in Phone Number!")
 
     if time_hour not in range(25) or time_min not in range(60):
         raise Warning("Invalid Time Format!")

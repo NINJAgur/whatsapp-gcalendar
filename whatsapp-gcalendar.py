@@ -12,9 +12,9 @@ SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 # , 'https://www.googleapis.com/auth/calendar',
 # 'https://www.googleapis.com/auth/calendar.events.readonly', 'https://www.googleapis.com/auth/calendar.events']
 
-GROUP_ID = "KRVu9MZAIjkIcHep58dMS7"
-GROUP_TEST = "LhccGDPEPKy3FCfLcdH739"
-USER_TEST = "+972525420276"
+GROUP_ID = "LThF2O3qSkMLmypHstftDR"
+GROUP_TEST = "FdnL2lzFkaPKr1bZdzaHoK"
+USER_TEST = "+972546331972"
 
 def main():
     """Shows basic usage of the Google Calendar API.
@@ -44,7 +44,7 @@ def main():
         nextWeek =  datetime.datetime.utcnow() + datetime.timedelta(days=7)
         nextWeek = nextWeek.isoformat() + 'Z'
         print('Getting the upcoming 10 events')
-        events_result = service.events().list(calendarId='k7d2r6hs1srcf5rp8ckac77lt0@group.calendar.google.com', timeMin=now, 
+        events_result = service.events().list(calendarId='primary', timeMin=now, 
                                               timeMax = nextWeek, maxResults=10, singleEvents=True,
                                               orderBy='startTime').execute()
         events = events_result.get('items', [])
@@ -54,7 +54,7 @@ def main():
             return
 
         now = datetime.datetime.now()
-        message = "המשמרות בשבוע הבא : \n"
+        message = "ביפ בופ אני הבוט של יוסטון :) \nהמשמרות בשבוע הנוכחי : \n"
 
         for event in events:
             if ('לילה' in event['summary']):
@@ -66,8 +66,9 @@ def main():
         
         
         print(message)
-        
-        whats.sendwhatmsg_to_group(GROUP_ID, message, now.hour, now.minute + 1, 15)
+        #whats.sendwhatmsg(USER_TEST, message, now.hour, now.minute + 1, 15)
+        whats.sendwhatmsg_to_group_instantly(GROUP_TEST, message, 7)
+        #whats.sendwhatmsg_to_group(GROUP_TEST, message, now.hour, now.minute + 1, 15)
 
     except HttpError as error:
         print('An error occurred: %s' % error)

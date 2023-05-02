@@ -8,3 +8,4 @@ httplib2==0.21.0
 cachetools==5.2.0
 protobuf===4.21.9
 rsa==4.9
+pynput===1.7.6
