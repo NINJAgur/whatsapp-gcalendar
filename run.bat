@@ -1,2 +1,2 @@
-cd C:\kaka\whatsapp-gcalendar
+C:\newton\whatsapp-gcalendar
 python .\whatsapp-gcalendar.py
